@@ -1,23 +1,6 @@
 # mac-B-free-bilibili-audios
 mac电脑快速/批量提取并下载B站视频的音频，可用于VIP音乐下载，仅需提供B站链接和下载目录
-打开终端，输入
-touch down.sh
-再输入
-open down.sh
-会自动打开一个空白文本，粘贴改好的脚本
-给脚本运行权限
-chmod +x down.sh
-运行下载
-./down.sh
 
-脚本会自动：
-检查安装 homebrew、yt-dlp、ffmpeg
-自动把音频下到你改的下载地址
-
-
----
-
-```
 # 🎵 Mac-B-Free-Bilibili-Audios
 
 > macOS 上一键批量下载 B 站视频音频 · 自动安装依赖 · 最高音质  
