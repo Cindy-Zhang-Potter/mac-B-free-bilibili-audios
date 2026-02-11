@@ -1,9 +1,7 @@
-# mac-B-free-bilibili-audios
-mac电脑快速/批量提取并下载B站视频的音频，可用于VIP音乐下载，仅需提供B站链接和下载目录
-
 # 🎵 Mac-B-Free-Bilibili-Audios
 
-> macOS 上一键批量下载 B 站视频音频 · 自动安装依赖 · 最高音质  
+> mac电脑快速/批量提取并下载B站视频的音频，可用于VIP音乐下载，仅需提供B站链接和下载目录
+
 > **只需粘贴链接，无需任何配置，像 VIP 一样听歌**
 
 ---
@@ -32,17 +30,21 @@ touch down.sh
 open down.sh
 ```
 
-系统会自动打开一个空白文本，**粘贴下方完整脚本**。
+系统会自动打开一个空白文本。
 
 ---
 
-### 2️⃣ 粘贴脚本代码
+### 2️⃣ 粘贴脚本代码并修改配置
+
+**将下方完整脚本复制粘贴到空白文件中**，然后**立即修改两处配置**：
 
 ```bash
 #!/bin/bash
 
-# 设置音频保存目录（可自行修改）
-SAVE_DIR="/Users/你的用户名/Downloads"
+# ===== 必改配置 =====
+# 修改1：设置你的音频保存目录，替换在引号里面，引号里面只是示例地址
+SAVE_DIR="/Users/你的用户名/Downloads/B站音乐"
+# ===================
 
 mkdir -p "$SAVE_DIR"
 
@@ -125,14 +127,15 @@ if ! command -v ffmpeg &> /dev/null; then
     echo "可以尝试: brew install ffmpeg"
 fi
 
-# B站视频链接列表
+# ===== 必改配置 =====
+# 修改2：在这里粘贴你要下载的B站链接，替换引号里的链接，引号里面的只是示例链接
 VIDEO_URLS=(
     "https://www.bilibili.com/video/BV1EH4y1S7tn"
     "https://www.bilibili.com/video/BV14y4y1h7wn"
     "https://www.bilibili.com/video/BV1TV4y1J7ix"
-    #这些是示例链接，需要替换
-    # 在这里添加更多链接，每行一个
+    # 在这里继续添加更多链接，每行一个
 )
+# ===================
 
 # 统计变量
 total=${#VIDEO_URLS[@]}
@@ -174,9 +177,21 @@ fi
 echo "====================================="
 ```
 
+**✅ 粘贴后立即修改两处：（在脚本里已以“必改配置”标注）**
+1. **第5行**：`SAVE_DIR` 改成你想要的下载目录
+2. **第90行起**：`VIDEO_URLS` 里面粘贴你要下载的B站链接
+
 ---
 
-### 3️⃣ 赋予执行权限
+### 3️⃣ 保存文件
+
+按 `Command + S` 保存，然后关闭文本编辑器。
+
+---
+
+### 4️⃣ 赋予执行权限
+
+回到终端，输入：
 
 ```bash
 chmod +x down.sh
@@ -184,38 +199,7 @@ chmod +x down.sh
 
 ---
 
-### 4️⃣ 修改保存目录（可选）
-
-用文本编辑器打开 `down.sh`，找到这一行：
-
-```bash
-SAVE_DIR="/Users/你的用户名/Downloads"
-```
-
-
-改成你想要的目录，例如：
-
-```bash
-SAVE_DIR="/Users/你的用户名/Downloads/B站音乐"
-```
-
----
-
-### 5️⃣ 添加B站链接
-
-在脚本中找到 `VIDEO_URLS=(` 这部分，每行粘贴一个B站视频链接：
-
-```bash
-VIDEO_URLS=(
-    "https://www.bilibili.com/video/BV1EH4y1S7tn"
-    "https://www.bilibili.com/video/BV14y4y1h7wn"
-    # 继续添加...
-)
-```
-
----
-
-### 6️⃣ 开始下载！
+### 5️⃣ 开始下载！
 
 ```bash
 ./down.sh
@@ -227,11 +211,11 @@ VIDEO_URLS=(
 
 ## ⚙️ 自定义配置
 
-| 配置项 | 说明 | 默认值 |
-|--------|------|--------|
-| `SAVE_DIR` | 音频保存路径 | `/Volumes/NO NAME/歌` |
-| `--audio-format` | 音频格式 | `m4a`（可改为 mp3） |
-| `--audio-quality` | 音质（0=最佳） | `0` |
+| 配置项 | 说明 | 默认值（示例） |
+|--------|------|----------------|
+| `SAVE_DIR` | 音频保存路径 | `/Users/你的用户名/Downloads/B站音乐` |
+| `--audio-format` | 音频格式 | `m4a`（可改为 `mp3`） |
+| `--audio-quality` | 音质 | `0`（0=最佳，5=好，9=普通） |
 
 ---
 
@@ -239,11 +223,9 @@ VIDEO_URLS=(
 
 下载完成后，**AirDrop 到 iPhone** → **用 VLC 播放**：
 
-```bash
-1. Mac 右键音频文件 → 共享 → AirDrop
-2. iPhone 点接收 → 保存到「文件」
-3. 打开 VLC → 浏览 → 本地存储 → 播放
-```
+1. Mac 右键音频文件 → 共享 → AirDrop → 选择你的 iPhone
+2. iPhone 点接收 → 保存到「文件」APP
+3. 打开 VLC → 点「浏览」→ 选择「本地存储」→ 找到文件播放
 
 ---
 
@@ -257,15 +239,17 @@ chmod +x down.sh
 
 **Q：下载失败/卡住？**
 
-检查网络，或尝试单个链接下载。部分 VIP 视频需登录。
+- 检查网络连接
+- 尝试单个链接下载
+- 部分 VIP 视频需要登录
 
 **Q：如何下载 MP3 格式？**
 
-将脚本中的 `--audio-format m4a` 改为 `--audio-format mp3`。
+将脚本第 54 行的 `--audio-format m4a` 改为 `--audio-format mp3`。
 
 **Q：脚本可以重复使用吗？**
 
-可以。每次运行前修改 `VIDEO_URLS` 里的链接即可。
+可以。每次运行前修改 `VIDEO_URLS` 里的链接即可，保存目录不用重复设置。
 
 ---
 
@@ -276,6 +260,3 @@ MIT License · 自由使用 · 禁止倒卖
 ---
 
 **Happy downloading! 🎧**
-```
-
----
